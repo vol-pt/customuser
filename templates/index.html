@@ -8,6 +8,7 @@
     {% endif %}
 
     <div class="ui tall raised segment">
+
         <form action="" method="POST" class="ui form">
             {% csrf_token %}
 
@@ -28,6 +29,32 @@
                 {{ form.password2 }}
             </div>
 
+            <div class="field">
+                <label>Select gender</label>
+                <div class="ui selection dropdown">
+                    <input type="hidden" name="gender">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">Gender</div>
+                    <select class="dropdown">
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fields">
+                <div class="field" style="width: 20%">
+                    <input type="text" placeholder="Day">
+                </div>
+                <div class="field" style="width: 35%">
+                    <input type="text" placeholder="Month">
+                </div>
+                <div class="field" style="width: 45%">
+                    <input type="text" placeholder="Year">
+                </div>
+
+            </div>
+
             <div class="field required">
                 <div class="ui checkbox">
                     {{ form.accept_tos }}
@@ -35,9 +62,9 @@
                 </div>
             </div>
 
-
-            <button type="submit" class="ui fluid button">Register</button>
+            <button type="submit" class="ui fluid  button positive">Register</button>
         </form>
+
         <h3 class="ui horizontal divider">OR</h3>
         <div id="or-links">
             <a href="/login/">Login</a>

@@ -9,7 +9,7 @@ from .models import CustomUser
 
 
 class EmailAuthenticationForm(AuthenticationForm):
-    username = forms.EmailField()
+    username = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus': ''}))
     remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())
 
     def clean_remember_me(self):
@@ -18,31 +18,22 @@ class EmailAuthenticationForm(AuthenticationForm):
             self.request.session.set_expiry(0)
 
 
-class CustomForm(UserCreationForm):
+class CustomCreationForm(UserCreationForm):
     date_of_birth = forms.DateField()
-    accept_tos = forms.BooleanField(required=True, help_text="Accept tos",label="Accept TOS")
+    gender = forms.ChoiceField(choices=(('m', 'Male'), ('f', 'Female')), required=False)
+    accept_tos = forms.BooleanField(required=True, help_text="Accept tos", label="Accept TOS")
 
     class Meta:
         model = CustomUser
         fields = ('email', 'password1', 'password2')
 
 
-class CustomLoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput())
-
-    def __init__(self, request=None, *args, **kwargs):
-        self.request = request
-        super(CustomLoginForm, self).__init__(*args, **kwargs)
-
-
 def index(request):
     if request.user.is_authenticated:
         return redirect('/accounts/profile/')
-    form = CustomForm()
+    form = CustomCreationForm()
     if request.method == 'POST':
-        print(request.POST)
-        form = CustomForm(request.POST)
+        form = CustomCreationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'User created!')
