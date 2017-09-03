@@ -17,9 +17,32 @@
             </div>
 
 
+            <div class="field">
+                <label>{{ form.fields.password1.label }}</label>
+                {{ form.password1 }}
+            </div>
+
+
+            <div class="field">
+                <label>{{ form.fields.password2.label }}</label>
+                {{ form.password2 }}
+            </div>
+
+            <div class="field required">
+                <div class="ui checkbox">
+                    {{ form.accept_tos }}
+                    <label>{{ form.accept_tos.label }}</label>
+                </div>
+            </div>
+
+
             <button type="submit" class="ui fluid button">Register</button>
-            <hr>
         </form>
+        <h3 class="ui horizontal divider">OR</h3>
+        <div id="or-links">
+            <a href="/login/">Login</a>
+            <a href="/">Forgot password?</a>
+        </div>
     </div>
     {% if form.errors %}
         {% for error in form.error_messages %}
@@ -27,5 +50,4 @@
         {% endfor %}
 
     {% endif %}
-    <a href="/login/">Login</a>
 {% endblock %}

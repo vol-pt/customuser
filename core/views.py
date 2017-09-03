@@ -19,6 +19,8 @@ class EmailAuthenticationForm(AuthenticationForm):
 
 
 class CustomForm(UserCreationForm):
+    date_of_birth = forms.DateField()
+    accept_tos = forms.BooleanField(required=True, help_text="Accept tos",label="Accept TOS")
 
     class Meta:
         model = CustomUser
