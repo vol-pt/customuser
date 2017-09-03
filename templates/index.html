@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+        Hi {{ user.get_full_name }}
+    {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+
+    {% endif %}
+
+    <div class="ui form">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}"> {{ field.label }}</label>
+                {{ field }}<br>
+            {% endfor %} <br/>
+            <button type="submit" class="ui button teal">Register</button>
+            <hr>
+        </form>
+    </div>
+    {% if form.errors %}
+        {% for error in form.error_messages %}
+            {{ error }}
+        {% endfor %}
+
+    {% endif %}
+    <a href="/login/">Login</a>
+{% endblock %}
