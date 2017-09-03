@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+<script>
+
+</script>
 {% block content %}
     {% if form.errors %}
         <div class="ui negative message">
@@ -34,7 +37,7 @@
 
             <div class="field">
                 <div class="ui checkbox">
-                    <input type="checkbox" tabindex="0" class="hidden">
+                    {{ form.remember_me }}
                     <label>Remember me</label>
                 </div>
             </div>

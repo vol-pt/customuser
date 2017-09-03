@@ -14,11 +14,11 @@ class EmailAuthenticationForm(AuthenticationForm):
 
     def clean_remember_me(self):
         if not self.cleaned_data.get('remember_me', ''):
+            # Flush session at browser close
             self.request.session.set_expiry(0)
 
 
 class CustomForm(UserCreationForm):
-    error_css_class = 'ui error'
 
     class Meta:
         model = CustomUser

@@ -6,25 +6,20 @@
     {% if user.is_authenticated %}
         Hi {{ user.get_full_name }}
     {% endif %}
-    {% if messages %}
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-
-    {% endif %}
 
     <div class="ui tall raised segment">
-    <div class="ui form">
-        <form action="" method="POST">
+        <form action="" method="POST" class="ui form">
             {% csrf_token %}
-            {% for field in form %}
-                <label for="{{ field.id_for_label }}"> {{ field.label }}</label>
-                {{ field }}<br>
-            {% endfor %} <br/>
+
+            <div class="field">
+                <label>{{ form.fields.email.label }}</label>
+                {{ form.email }}
+            </div>
+
+
             <button type="submit" class="ui fluid button">Register</button>
             <hr>
         </form>
-    </div>
     </div>
     {% if form.errors %}
         {% for error in form.error_messages %}
