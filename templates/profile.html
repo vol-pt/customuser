@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
+
 {% block content %}
     {{ user.get_full_name }}
     <a href="/logout">Logout</a>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="ui positive message">
+                <i class="close icon"></i>
+                <div class="header">
+                    User successfully created
+                </div>
+                <p>{{ message }} complete profile now!</p>
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
 {% endblock %}

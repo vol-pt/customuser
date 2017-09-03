@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="ui form">
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="ui button primary">Login</button>
-        </form>
-        <hr>
+    <form class="ui form" action="" method="POST">
+        {% csrf_token %}
+        <div class="ui field error">
+            <label for="username">{{ form.fields.username.label }}</label>
+            {{ form.username }}
+        </div>
+        <div class="field">
+            <label>{{ form.fields.password.label }}</label>
+            {{ form.password }}
+        </div>
+        <div class="field">
+            <div class="ui checkbox">
+                <input type="checkbox" tabindex="0" class="hidden">
+                <label>Remember me</label>
+            </div>
+        </div>
+        <div class="field">
+            <label>{{ form.fields.password.label }}</label>
+            {{ form.gender }}
+        </div>
+        <button type="submit" class="ui button primary">Login</button>
+    </form>
+    <hr>
     <span><a href="/">Register</a></span>
-    </div>
+
+
 {% endblock %}
