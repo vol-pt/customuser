@@ -1,29 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form class="ui form" action="" method="POST">
-        {% csrf_token %}
-        <div class="ui field error">
-            <label for="username">{{ form.fields.username.label }}</label>
-            {{ form.username }}
-        </div>
-        <div class="field">
-            <label>{{ form.fields.password.label }}</label>
-            {{ form.password }}
-        </div>
-        <div class="field">
-            <div class="ui checkbox">
-                <input type="checkbox" tabindex="0" class="hidden">
-                <label>Remember me</label>
+    {% if form.errors %}
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">
+                Errors occurred
             </div>
+            <p>
+                Email or password invalid
+            </p>
         </div>
-        <div class="field">
-            <label>{{ form.fields.password.label }}</label>
-            {{ form.gender }}
-        </div>
-        <button type="submit" class="ui button primary">Login</button>
-    </form>
-    <hr>
-    <span><a href="/">Register</a></span>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="ui tall raised segment">
+        <form class="ui form" action="" method="POST">
+
+            {% csrf_token %}
+
+            <div class="ui field">
+                <label>{{ form.fields.username.label }}</label>
+                {{ form.username }}
+            </div>
 
 
+            <div class="field">
+                <label>{{ form.fields.password.label }}</label>
+                {{ form.password }}
+            </div>
+
+
+            <div class="field">
+                <div class="ui checkbox">
+                    <input type="checkbox" tabindex="0" class="hidden">
+                    <label>Remember me</label>
+                </div>
+            </div>
+
+
+            <button type="submit" class="ui fluid button positive">Login</button>
+        </form>
+
+        <h3 class="ui horizontal divider">OR</h3>
+        <div id="or-links">
+            <a href="/">Register</a>
+            <a href="/">Forgot password?</a>
+        </div>
+    </div>
 {% endblock %}

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-
+    <br>
+    <br>
+    <br>
     {% if user.is_authenticated %}
         Hi {{ user.get_full_name }}
     {% endif %}
@@ -11,6 +13,7 @@
 
     {% endif %}
 
+    <div class="ui tall raised segment">
     <div class="ui form">
         <form action="" method="POST">
             {% csrf_token %}
@@ -18,9 +21,10 @@
                 <label for="{{ field.id_for_label }}"> {{ field.label }}</label>
                 {{ field }}<br>
             {% endfor %} <br/>
-            <button type="submit" class="ui button teal">Register</button>
+            <button type="submit" class="ui fluid button">Register</button>
             <hr>
         </form>
+    </div>
     </div>
     {% if form.errors %}
         {% for error in form.error_messages %}

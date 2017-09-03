@@ -11,8 +11,6 @@ from .models import CustomUser
 class EmailAuthenticationForm(AuthenticationForm):
     username = forms.EmailField()
     remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())
-    gender = forms.ChoiceField(widget=forms.Select,
-                               choices=(('m', 'Male'), ('f', 'Famele'), ('u', 'Prefer not to answer')), required=False)
 
     def clean_remember_me(self):
         if not self.cleaned_data.get('remember_me', ''):

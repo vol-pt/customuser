@@ -11,11 +11,30 @@
     <link rel="stylesheet" href="{% static 'semantic.min.css' %}">
 
     <script src="{% static 'semantic.min.js' %}"></script>
+    <style>
+        #or-links {
+            padding-left: 5px;
+
+        }
+
+        #or-links > a {
+            color: #545454;
+
+        }
+
+        #or-links > a:last-child {
+            padding-left: 5px;
+        }
+
+        #or-links > a:hover {
+            color: #0d71bb;
+        }
+    </style>
 </head>
 <body>
 
 <div class="ui grid">
-    <div class="ui six wide centered column">
+    <div class="ui four wide centered column">
         {% block content %}
         {% endblock %}
     </div>
