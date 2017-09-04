@@ -39,7 +39,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     # password = models.CharField(_('password'), max_length=128)
     # last_login = models.DateTimeField(_('last login'), blank=True, null=True)
     is_superuser = models.BooleanField(help_text=_('have all privliges'), default=False)
-    email = models.EmailField(help_text=(_('user email text')), unique=True)
+    email = models.EmailField(help_text=(_('user email')), unique=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_staff = models.BooleanField(
         _('staff status'),

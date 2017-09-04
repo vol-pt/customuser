@@ -19,9 +19,9 @@ class EmailAuthenticationForm(AuthenticationForm):
 
 
 class CustomCreationForm(UserCreationForm):
-    date_of_birth = forms.DateField()
-    gender = forms.ChoiceField(choices=(('m', 'Male'), ('f', 'Female')), required=False)
-    accept_tos = forms.BooleanField(required=True, label="Accept TOS")
+    date_of_birth = forms.DateField(required=False)
+    gender = forms.ChoiceField(choices=(('m', 'Male'), ('f', 'Female'), ('o', 'Pre')), required=False)
+    accept_tos = forms.BooleanField(required=False, label="Accept TOS")
 
     class Meta:
         model = CustomUser

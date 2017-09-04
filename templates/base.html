@@ -47,7 +47,25 @@
     </script>
 </head>
 <body>
-
+<div class="ui top attached inverted menu" style="border-radius: 0">
+    <div class="header item">
+        Our Company
+    </div>
+    <a class="item {% if request.path == '/login/' %}active{% endif %}" href="/login/">
+        Login
+    </a>
+    <a class="item {% if request.path == '/' %}active{% endif %}" href="/">
+        Register
+    </a>
+    {% if request.user.is_authenticated %}
+        <span class="item">Hello {{ user.get_full_name }}</span>
+    {% endif %}
+    <div class="right menu">
+        <a class="item {% if request.path == '/accounts/profile/' %}active{% endif %}" href="/accounts/profile/">
+            Profile
+        </a>
+    </div>
+</div>
 <div class="ui grid">
     <div class="ui four wide centered column">
         {% block content %}
