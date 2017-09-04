@@ -55,6 +55,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ),
     )
 
+    date_of_birth = models.DateField()
+
     def clean(self):
         super(CustomUser, self).clean()
         self.email = self.__class__.objects.normalize_email(self.email)

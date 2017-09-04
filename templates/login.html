@@ -3,17 +3,7 @@
 
 </script>
 {% block content %}
-    {% if form.errors %}
-        <div class="ui negative message">
-            <i class="close icon"></i>
-            <div class="header">
-                Errors occurred
-            </div>
-            <p>
-                Email or password invalid
-            </p>
-        </div>
-    {% endif %}
+
     <br>
     <br>
     <br>
@@ -52,4 +42,16 @@
             <a href="/">Forgot password?</a>
         </div>
     </div>
+
+        {% if form.errors %}
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">
+                Errors occurred
+            </div>
+            <p>
+                Email or password invalid
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}
