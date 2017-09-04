@@ -34,11 +34,15 @@
     </style>
     <script>
         $(document).ready(function () {
+            var today = new Date();
             $('.ui.checkbox').checkbox();
             $('select.dropdown').dropdown();
             $('#calendar').calendar({
-                type: 'date'
-            })
+                type: 'date',
+                startMode: 'year',
+                {#                minDate: new Date(today.getYear() - 150, today.getMonth(), today.getDay()),#}
+                {#                maxDate: new Date(today.getYear() - 10, today.getMonth(), today.getDay())#}
+            });
         });
     </script>
 </head>

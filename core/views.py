@@ -9,11 +9,11 @@ from .models import CustomUser
 
 
 class EmailAuthenticationForm(AuthenticationForm):
-    username = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus': ''}))
+    username = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus': True}))
     remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())
 
     def clean_remember_me(self):
-        if not self.cleaned_data.get('remember_me', ''):
+        if not self.cleaned_data.get('remember_me', None):
             # Flush session at browser close
             self.request.session.set_expiry(0)
 
