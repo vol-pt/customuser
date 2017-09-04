@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.views.generic import View
 from django.contrib import messages
 from django import forms
@@ -21,7 +21,7 @@ class EmailAuthenticationForm(AuthenticationForm):
 class CustomCreationForm(UserCreationForm):
     date_of_birth = forms.DateField()
     gender = forms.ChoiceField(choices=(('m', 'Male'), ('f', 'Female')), required=False)
-    accept_tos = forms.BooleanField(required=True, help_text="Accept tos", label="Accept TOS")
+    accept_tos = forms.BooleanField(required=True, label="Accept TOS")
 
     class Meta:
         model = CustomUser
