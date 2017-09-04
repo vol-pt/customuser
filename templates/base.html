@@ -49,8 +49,15 @@
             $('#calendar').calendar({
                 type: 'date',
                 startMode: 'year',
-                {#                minDate: new Date(today.getYear() - 150, today.getMonth(), today.getDay()),#}
-                {#                maxDate: new Date(today.getYear() - 10, today.getMonth(), today.getDay())#}
+                formatter: {
+                    date: function (date, settings) {
+                        if (!date) return '';
+                        var day = date.getDay();
+                        var month = date.getMonth();
+                        var year = date.getYear() + 1900;
+                        return month + '/' + day + '/' + year;
+                    }
+                }
             });
         });
     </script>

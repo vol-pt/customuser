@@ -44,14 +44,11 @@
     </div>
 
         {% if form.errors %}
-        <div class="ui negative message">
+        <div class="ui red message">
             <i class="close icon"></i>
             <div class="header">
-                Errors occurred
+                Invalid email or password
             </div>
-            <p>
-                Email or password invalid
-            </p>
         </div>
     {% endif %}
 {% endblock %}

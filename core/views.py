@@ -1,31 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.views.generic import View
 from django.contrib import messages
-from django import forms
 
-from .models import CustomUser
-
-
-class EmailAuthenticationForm(AuthenticationForm):
-    username = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus': True}))
-    remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())
-
-    def clean_remember_me(self):
-        if not self.cleaned_data.get('remember_me', None):
-            # Flush session at browser close
-            self.request.session.set_expiry(0)
-
-
-class CustomCreationForm(UserCreationForm):
-    date_of_birth = forms.DateField(required=False)
-    gender = forms.ChoiceField(choices=(('m', 'Male'), ('f', 'Female'), ('o', 'Pre')), required=False)
-    accept_tos = forms.BooleanField(required=False, label="Accept TOS")
-
-    class Meta:
-        model = CustomUser
-        fields = ('email', 'password1', 'password2')
+from .forms import EmailAuthenticationForm, CustomCreationForm
 
 
 def index(request):

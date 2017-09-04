@@ -12,19 +12,19 @@
         <form action="" method="POST" class="ui form">
             {% csrf_token %}
 
-            <div class="field">
+            <div class="field {% if form.email.errors %}error{% endif %}">
                 <label>{{ form.fields.email.label }}</label>
                 {{ form.email }}
             </div>
 
 
-            <div class="field">
+            <div class="field {% if form.password1.errors %}error{% endif %}">
                 <label>{{ form.fields.password1.label }}</label>
                 {{ form.password1 }}
             </div>
 
 
-            <div class="field">
+            <div class="field {% if form.password2.errors %}error{% endif %}">
                 <label>{{ form.fields.password2.label }}</label>
                 {{ form.password2 }}
             </div>
@@ -48,7 +48,7 @@
                 <div class="ui calendar" id="calendar">
                     <div class="ui input left icon">
                         <i class="calendar icon"></i>
-                        <input type="text" placeholder="Date">
+                        <input type="text" placeholder="Date" name="date_of_birth">
                     </div>
                 </div>
             </div>
@@ -70,9 +70,12 @@
         </div>
     </div>
     {% if form.errors %}
-        {% for error in form.error_messages %}
-            {{ error }}
-        {% endfor %}
+        <div class="ui red message">
+            {% for field in form %}
+                {{ field.errors }}
+            {% endfor %}
 
+        </div>
     {% endif %}
+
 {% endblock %}
