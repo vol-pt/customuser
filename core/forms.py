@@ -16,6 +16,7 @@ class EmailAuthenticationForm(AuthenticationForm):
         if not self.cleaned_data.get('remember_me', None):
             # Flush session at browser close
             self.request.session.set_expiry(0)
+        return self.cleaned_data.get('remember_me')
 
 
 class CustomCreationForm(UserCreationForm):
@@ -26,10 +27,6 @@ class CustomCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('email', 'password1', 'password2', 'date_of_birth')
-
-    def clean(self):
-        print(self.cleaned_data)
-        return self.cleaned_data
 
     def clean_date_of_birth(self):
         date = self.cleaned_data.get('date_of_birth')
