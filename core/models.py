@@ -28,6 +28,12 @@ class CustomUserManager(BaseUserManager):
         kwargs.setdefault('is_superuser', True)
         return self._create_user(email, password, **kwargs)
 
+    def admins(self):
+        return self.filter(is_staff=True, is_superuser=True, is_active=True)
+
+    def inactive_users(self, limit=50):
+        return self.filter(is_active=False)[:limit]
+
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
