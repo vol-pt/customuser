@@ -76,3 +76,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
+
+
+class FailedLoginAttempt(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    ip = models.GenericIPAddressField()
+    user_exists = models.BooleanField(blank=False)
+    username = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return "{} {} {}".format(self.ip, self.username, self.date)
