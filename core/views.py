@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView,LogoutView
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -14,8 +14,8 @@ def index(request):
 
         form = CustomCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            user = authenticate(email=user.email, password=form.cleaned_data['password1'])
+            form.save()
+            user = authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password1'])
             login(request, user)
             messages.success(request, 'User created!')
             return redirect('/accounts/profile/')
@@ -33,3 +33,8 @@ class CustomLoginView(LoginView):
 class ProfileView(View):
     def get(self, request):
         return render(request, 'profile.html')
+
+
+class CustomLogoutView(LogoutView):
+    template_name = 'index.html'
+    next_page = '/'
