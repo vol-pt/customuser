@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.views import LoginView,LogoutView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.views.generic import ListView
+
 from .forms import EmailAuthenticationForm, CustomCreationForm
+from .models import CustomUser
 
 
 def index(request):
@@ -38,3 +41,10 @@ class ProfileView(View):
 class CustomLogoutView(LogoutView):
     template_name = 'index.html'
     next_page = '/'
+
+
+class UserListView(ListView):
+    model = CustomUser
+    template_name = 'users.html'
+    paginate_by = 4
+    ordering = '-date_joined'

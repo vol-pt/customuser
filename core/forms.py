@@ -20,6 +20,7 @@ class EmailAuthenticationForm(AuthenticationForm):
 
 
 class CustomCreationForm(UserCreationForm):
+    email = forms.EmailField(label="Email")
     date_of_birth = forms.DateField(required=True)
     gender = forms.ChoiceField(choices=(('m', 'Male'), ('f', 'Female'), ('o', 'Pre')), required=False)
     accept_tos = forms.BooleanField(required=True, label="Accept TOS")
