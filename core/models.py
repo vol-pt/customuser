@@ -61,7 +61,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ),
     )
 
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(default=timezone.now)
 
     def clean(self):
         super(CustomUser, self).clean()

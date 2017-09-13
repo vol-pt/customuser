@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import CustomUser
+from ..models import CustomUser
 from django.utils import timezone
 
 

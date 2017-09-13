@@ -11,6 +11,7 @@ from .models import CustomUser
 class EmailAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus': True}))
     remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())
+
     def clean_remember_me(self):
         if not self.cleaned_data.get('remember_me', None):
             # Flush session at browser close
@@ -28,6 +29,12 @@ class CustomCreationForm(UserCreationForm):
         model = CustomUser
         fields = ('email', 'password1', 'password2', 'date_of_birth')
 
+    error_messages = {
+        'accept_tos': {
+            'required': ("You must accept TOS.",),
+        }
+    }
+
     def clean_date_of_birth(self):
         date = self.cleaned_data.get('date_of_birth')
         today = datetime.date(datetime.now())
@@ -36,11 +43,6 @@ class CustomCreationForm(UserCreationForm):
         if date < today - relativedelta.relativedelta(years=130):
             raise ValidationError("You're 130 years+ old good for you!", code='invalid')
         return date
-
-    def clean_accept_tos(self):
-        if not self.cleaned_data.get('accept_tos', None):
-            raise ValidationError('TOS must be accepted', code='invalid')
-        return self.cleaned_data['accept_tos']
 
     def save(self, commit=False):
         user = super(CustomCreationForm, self).save(commit)
