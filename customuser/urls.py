@@ -6,7 +6,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^login/$', CustomLoginView.as_view()),
-    url(r'^accounts/profile/$', ProfileView.as_view()),
+    url(r'^accounts/profile/$', ProfileView.as_view(), name='accounts_profile'),
     url(r'^logout/$', CustomLogoutView.as_view()),
     url(r'^users/$', UserListView.as_view())
 ]
