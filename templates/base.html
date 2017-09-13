@@ -54,6 +54,8 @@
             $('#calendar').calendar({
                 type: 'date',
                 startMode: 'year',
+                minDate: new Date(today.getFullYear() - 130, today.getMonth(), today.getDay()),
+                maxDate: new Date(today.getFullYear() - 16, today.getMonth(), today.getDay()),
                 formatter: {
                     date: function (date, settings) {
                         if (!date) return '';
