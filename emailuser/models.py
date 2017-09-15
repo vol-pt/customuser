@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 
-class CustomUserManager(BaseUserManager):
+class EmailUserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **kwargs):
@@ -35,12 +35,12 @@ class CustomUserManager(BaseUserManager):
         return self.filter(is_active=False)[:limit]
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class EmailUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
 
-    objects = CustomUserManager()
+    objects = EmailUserManager()
 
     # password = models.CharField(_('password'), max_length=128)
     # last_login = models.DateTimeField(_('last login'), blank=True, null=True)
@@ -64,7 +64,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_of_birth = models.DateField(default=timezone.now)
 
     def clean(self):
-        super(CustomUser, self).clean()
+        super(EmailUser, self).clean()
         self.email = self.__class__.objects.normalize_email(self.email)
 
     def get_short_name(self):

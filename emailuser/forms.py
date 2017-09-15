@@ -5,10 +5,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.exceptions import ValidationError
 from dateutil import relativedelta
 
-from .models import CustomUser
+from .models import EmailUser
 
 
-class EmailAuthenticationForm(AuthenticationForm):
+class EmailUserAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus': True}))
     remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput())
 
@@ -19,14 +19,14 @@ class EmailAuthenticationForm(AuthenticationForm):
         return self.cleaned_data.get('remember_me')
 
 
-class CustomCreationForm(UserCreationForm):
+class EmailUserCreationForm(UserCreationForm):
     email = forms.EmailField(label="Email")
     date_of_birth = forms.DateField(required=True)
     gender = forms.ChoiceField(choices=(('m', 'Male'), ('f', 'Female'), ('o', 'Pre')), required=False)
     accept_tos = forms.BooleanField(required=True, label="Accept TOS")
 
     class Meta:
-        model = CustomUser
+        model = EmailUser
         fields = ('email', 'password1', 'password2', 'date_of_birth')
 
     error_messages = {
@@ -45,7 +45,7 @@ class CustomCreationForm(UserCreationForm):
         return date
 
     def save(self, commit=False):
-        user = super(CustomCreationForm, self).save(commit)
+        user = super(EmailUserCreationForm, self).save(commit)
         user.date_of_birth = self.cleaned_data['date_of_birth']
         user.save()
         return user

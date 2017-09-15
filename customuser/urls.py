@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib import admin
-from core.views import index, CustomLoginView, ProfileView, CustomLogoutView, UserListView
+from emailuser.views import index, CustomLoginView, ProfileView, CustomLogoutView, UserListView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

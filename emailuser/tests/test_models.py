@@ -1,5 +1,5 @@
 from django.test import TestCase
-from ..models import CustomUser as EmailUser
+from ..models import EmailUser as EmailUser
 
 
 class EmailUserTest(TestCase):
