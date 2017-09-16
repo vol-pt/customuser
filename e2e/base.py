@@ -29,11 +29,12 @@ class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         super(FunctionalTest, self).setUpClass()
         self.browser = webdriver.Chrome()
-        self.page = Page(self.browser)
 
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
             self.live_server_url = 'http://' + staging_server
+
+        self.page = Page(self.browser, self.live_server_url)
 
     def tearDown(self):
         self.browser.quit()

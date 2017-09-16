@@ -8,4 +8,7 @@ class UserLoginTest(FunctionalTest):
         self.wait_for(lambda: self.page.get_login_password_field())
 
     def test_unauthenticated_user_can_interact_with_form(self):
-        self.browser.get()
+        pass
+
+    def test_custom_url_handling(self):
+        self.assertEqual(self.page.urls.login, self.live_server_url + '/login/')
