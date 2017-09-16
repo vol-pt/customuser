@@ -1,4 +1,4 @@
-from .base import FunctionalTest
+from e2e.base import FunctionalTest
 
 from selenium.webdriver.common.keys import Keys
 
@@ -22,3 +22,5 @@ class UserLoginTest(FunctionalTest):
         submit_button.send_keys(Keys.ENTER)
         errors = self.page.find_error_messages_after_login_form_submission()
         self.assertIn('Invalid email or password', errors.text)
+
+
