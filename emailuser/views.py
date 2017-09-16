@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.views.generic import View
 from django.contrib import messages
@@ -47,6 +48,7 @@ class ProfileView(View):
 class CustomLogoutView(LogoutView):
     template_name = 'emailuser/register.html'
     next_page = '/'
+    extra_context = {'message': 'Successfully logged out'}
 
 
 class UserListView(ListView):

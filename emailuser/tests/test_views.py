@@ -13,15 +13,15 @@ class EmailUserLoginViewTest(TestCase):
         self.password = 'zaqmko123321'
         self.user = EmailUser.objects.create_user(self.username, self.password, date_of_birth=timezone.now())
 
-    def test_can_log_in_usinig_default_backend(self):
+    def test_can_log_in_using_default_backend(self):
         self.client.login(email=self.username, password=self.password)
-        response = self.client.get('/', follow=True)
+        response = self.client.get(reverse('login'), follow=True)
         self.assertContains(response, 'Logout')
         self.assertContains(response, self.username)
 
     def test_redirects_to_index_after_correct_login(self):
         self.client.login(email=self.username, password=self.password)
-        response = self.client.get('/')
+        response = self.client.get(reverse('login'))
         self.assertRedirects(response, reverse('accounts_profile'))
 
     def test_context_contains_email_user_authentication_form(self):

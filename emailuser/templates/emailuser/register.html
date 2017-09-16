@@ -3,10 +3,10 @@
     <br>
     <br>
     <br>
-    {% if user.is_authenticated %}
-        Hi {{ user.get_full_name }}
+    {% if message %}
+        {{ message }}
     {% endif %}
-    <div class="ten wide mobile nine wide tablet four wide computer centered column">
+    <div class="twelve wide mobile eleven wide tablet four wide computer centered column">
         <div class="ui tall raised segment">
 
             <form action="" method="POST" class="ui form">
@@ -76,4 +76,5 @@
             </div>
             </div>
         {% endif %}
+
 {% endblock %}

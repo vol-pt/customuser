@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {{ user.get_full_name  }}<br>
-    {{ user.date_of_birth | date:"d/M/Y" }}<br>
-    {{ user.date_joined  | date:"d/M/Y" }}
-    <a href="/logout">Logout</a>
+    <div class="row">
+    <div class="four wide computer column"></div>
+        <div class="twelve wide mobile eleven wide tablet six wide computer column">
+            {{ user.get_full_name }}<br>
+            {{ user.date_of_birth | date:"d/M/Y" }}<br>
+            {{ user.date_joined  | date:"d/M/Y" }}
+            <a href="/logout">Logout</a>
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="ui positive message">
-                <i class="close icon"></i>
-                <div class="header">
-                    User successfully created
-                </div>
-                <p>{{ message }} complete profile now!</p>
-            </div>
-        {% endfor %}
-    {% endif %}
-
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="ui positive message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            User successfully created
+                        </div>
+                        <p>{{ message }} complete profile now!</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div
+        <div class="six wide computer column  " style="background: green;">
+            <h1>aaaaaa</h1>
+        </div>
+    </div>
 {% endblock %}
