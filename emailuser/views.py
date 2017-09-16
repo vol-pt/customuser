@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -9,25 +10,30 @@ from .forms import EmailUserAuthenticationForm, EmailUserCreationForm
 from .models import EmailUser
 
 
-def index(request):
+def register(request):
+    # this view is for non-authenticated users only
     if request.user.is_authenticated:
-        return redirect('/accounts/profile/')
+        return redirect(reverse('profile_accounts'))
+
+    # create empty form
     form = EmailUserCreationForm()
     if request.method == 'POST':
-
+        # populate form with data
         form = EmailUserCreationForm(request.POST)
         if form.is_valid():
+            # if form is valid try to save and authenticate user
             form.save()
             user = authenticate(email=form.cleaned_data['email'], password=form.cleaned_data['password1'])
             login(request, user)
             messages.success(request, 'User created!')
             return redirect('/accounts/profile/')
-        return render(request, 'emailuser/index.html', {'form': form})
+        # return form with error messages
+        return render(request, 'emailuser/register.html', {'form': form})
+    # GET
+    return render(request, 'emailuser/register.html', {'form': form})
 
-    return render(request, 'emailuser/index.html', {'form': form})
 
-
-class CustomLoginView(LoginView):
+class EmailUserLogin(LoginView):
     redirect_authenticated_user = True
     template_name = 'emailuser/login.html'
     authentication_form = EmailUserAuthenticationForm
@@ -39,7 +45,7 @@ class ProfileView(View):
 
 
 class CustomLogoutView(LogoutView):
-    template_name = 'emailuser/index.html'
+    template_name = 'emailuser/register.html'
     next_page = '/'
 
 

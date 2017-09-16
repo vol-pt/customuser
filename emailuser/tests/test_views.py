@@ -1,11 +1,13 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.conf import settings
+
+from emailuser.forms import EmailUserCreationForm, EmailUserAuthenticationForm
 from ..models import EmailUser
 from django.utils import timezone
 
 
-class LoginTest(TestCase):
+class EmailUserLoginViewTest(TestCase):
     def setUp(self):
         self.username = 'exampleuser@exampledomain.com'
         self.password = 'zaqmko123321'
@@ -21,6 +23,10 @@ class LoginTest(TestCase):
         self.client.login(email=self.username, password=self.password)
         response = self.client.get('/')
         self.assertRedirects(response, reverse('accounts_profile'))
+
+    def test_context_contains_email_user_authentication_form(self):
+        response = self.client.get(reverse('login'))
+        self.assertIsInstance(response.context['form'], EmailUserAuthenticationForm)
 
     def test_can_log_in_using_view(self):
         response = self.client.post(reverse('login'),
@@ -43,3 +49,13 @@ class LoginTest(TestCase):
         self.assertTemplateUsed(response, 'emailuser/login.html')
         self.assertContains(response, 'Login')
         self.assertContains(response, 'Forgot password?')
+
+
+class RegisterViewTest(TestCase):
+    def test_view_returns_200_OK(self):
+        response = self.client.get(reverse('register'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_context_contains_email_user_creation_form(self):
+        response = self.client.get(reverse('register'))
+        self.assertIsInstance(response.context['form'], EmailUserCreationForm)

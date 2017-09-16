@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <title>Title</title>
     <script
             src="https://code.jquery.com/jquery-3.2.1.js"
@@ -12,7 +13,6 @@
     <link rel="stylesheet" href="{% static 'calendar.min.css' %}">
     <script src="{% static 'calendar.min.js' %}"></script>
     <script src="{% static 'semantic.min.js' %}"></script>
-
     <style>
         #or-links {
             padding-left: 5px;
@@ -98,10 +98,8 @@
     </div>
 </div>
 <div class="ui grid">
-    <div class="ui four wide centered column">
         {% block content %}
         {% endblock %}
-    </div>
 </div>
 
 </body>

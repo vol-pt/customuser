@@ -8,47 +8,49 @@
     <br>
     <br>
     <br>
-    <div class="ui tall raised segment">
-        <form class="ui form" action="" method="POST">
+    <div class="ten wide mobile eight wide tablet four wide computer centered column">
+        <div class="ui tall raised segment">
+            <form class="ui form" action="" method="POST">
 
-            {% csrf_token %}
+                {% csrf_token %}
 
-            <div class="ui field">
-                <label>{{ form.fields.username.label }}</label>
-                {{ form.username }}
-            </div>
-
-
-            <div class="field">
-                <label>{{ form.fields.password.label }}</label>
-                {{ form.password }}
-            </div>
-
-
-            <div class="field">
-                <div class="ui checkbox">
-                    {{ form.remember_me }}
-                    <label>Remember me</label>
+                <div class="ui field">
+                    <label>{{ form.fields.username.label }}</label>
+                    {{ form.username }}
                 </div>
+
+
+                <div class="field">
+                    <label>{{ form.fields.password.label }}</label>
+                    {{ form.password }}
+                </div>
+
+
+                <div class="field">
+                    <div class="ui checkbox">
+                        {{ form.remember_me }}
+                        <label>Remember me</label>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="ui fluid button positive">Login</button>
+            </form>
+
+            <h3 class="ui horizontal divider">OR</h3>
+            <div id="or-links">
+                <a href="/">Register</a>
+                <a href="/">Forgot password?</a>
             </div>
-
-
-            <button type="submit" class="ui fluid button positive">Login</button>
-        </form>
-
-        <h3 class="ui horizontal divider">OR</h3>
-        <div id="or-links">
-            <a href="/">Register</a>
-            <a href="/">Forgot password?</a>
         </div>
-    </div>
 
         {% if form.errors %}
-        <div class="ui red message">
-            <i class="close icon"></i>
-            <div class="header">
-                Invalid email or password
+            <div class="ui red message">
+                <i class="close icon"></i>
+                <div class="header">
+                    Invalid email or password
+                </div>
             </div>
-        </div>
-    {% endif %}
+            </div>
+        {% endif %}
 {% endblock %}
