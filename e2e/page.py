@@ -3,7 +3,7 @@ from selenium.common.exceptions import WebDriverException
 
 from .urls import URL_CONF
 
-DEFAULT_MAX_WAIT = 5
+DEFAULT_MAX_WAIT = 10
 
 
 def wait(fn):
@@ -15,7 +15,7 @@ def wait(fn):
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > DEFAULT_MAX_WAIT:
                     raise e
-                time.sleep(0.5)
+                time.sleep(0.2)
 
     return actual_decorator
 
@@ -39,6 +39,11 @@ class Page:
         self.browser = browser_handle
         self.urls = Urls(URL_CONF, live_server_url)
 
+    #############################################
+    #                                           #
+    #                  LOGIN                    #
+    #                                           #
+    #############################################
     @wait
     def get_login_email_field(self):
         return self.browser.find_element_by_id('id_username')
@@ -58,3 +63,33 @@ class Page:
     @wait
     def find_error_messages_after_login_form_submission(self):
         return self.browser.find_element_by_css_selector('.ui.red.message')
+
+    #############################################
+    #                                           #
+    #                REGISTER                   #
+    #                                           #
+    #############################################
+
+    @wait
+    def get_register_email(self):
+        return self.browser.find_element_by_id('id_email')
+
+    @wait
+    def get_register_password_1(self):
+        return self.browser.find_element_by_id('id_password1')
+
+    @wait
+    def get_register_password_2(self):
+        return self.browser.find_element_by_id('id_password2')
+
+    @wait
+    def get_register_select_gender(self):
+        return self.browser.find_element_by_css_selector('.ui.selection.dropdown')
+
+    @wait
+    def get_register_birth_date(self):
+        return self.browser.find_element_by_name('date_of_birth')
+
+    def click_on_tos(self):
+        # ugly hack
+        self.browser.execute_script("document.querySelector('.ui.checkbox').click()")

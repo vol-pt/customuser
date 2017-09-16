@@ -1,5 +1,6 @@
 URL_CONF = {
     'login': '/login/',
-    'register': '/register/'
+    'register': '/',
+    'user_profile': '/accounts/profile/'
 
 }
