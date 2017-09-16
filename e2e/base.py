@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         super(FunctionalTest, self).setUpClass()
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Firefox()
 
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
