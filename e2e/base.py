@@ -1,28 +1,11 @@
 import os
-import time
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
-from selenium.common.exceptions import WebDriverException
 import logging
 
-from .page import Page
+from .page import Page, wait
 
 logger = logging.getLogger(__name__)
-DEFAULT_MAX_WAIT = 5
-
-
-def wait(fn):
-    def actual_decorator(*args, **kwargs):
-        start_time = time.time()
-        while True:
-            try:
-                return fn(*args, **kwargs)
-            except (AssertionError, WebDriverException) as e:
-                if time.time() - start_time > DEFAULT_MAX_WAIT:
-                    raise e
-                time.sleep(0.5)
-
-    return actual_decorator
 
 
 class FunctionalTest(StaticLiveServerTestCase):

@@ -14,7 +14,7 @@ from .models import EmailUser
 def register(request):
     # this view is for non-authenticated users only
     if request.user.is_authenticated:
-        return redirect(reverse('profile_accounts'))
+        return redirect(reverse('accounts_profile'))
 
     # create empty form
     form = EmailUserCreationForm()
