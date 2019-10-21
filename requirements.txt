@@ -56,4 +56,4 @@ urllib3==1.22
 uwsgitop==0.10
 vine==1.1.4
 virtualenv==15.1.0
-Werkzeug==0.12.2
+Werkzeug==0.15.3
