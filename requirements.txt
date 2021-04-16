@@ -10,7 +10,7 @@ coverage==4.4.1
 Django==1.11.5
 django-cache-panel==0.1
 django-celery-results==1.0.1
-django-debug-toolbar==1.8
+django-debug-toolbar==1.11.1
 django-extensions==1.9.0
 djangorestframework==3.6.4
 docutils==0.14
